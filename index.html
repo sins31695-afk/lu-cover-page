@@ -176,9 +176,7 @@
        ========================================= */
 
     .middle-section {
-      /* Dept name এবং Assignment-এর মাঝের গ্যাপ বাড়ানো হয়েছে */
       margin-top: 55px;
-      /* Assignment এবং Submitted To-এর মাঝের গ্যাপ বাড়ানো হয়েছে */
       margin-bottom: 60px;
     }
 
@@ -222,7 +220,6 @@
       width: 100%;
     }
 
-    /* Submitted To এবং Submitted By-এর মাঝের গ্যাপ বাড়ানো হয়েছে */
     .submitted-by {
       margin-top: 55px !important;
       flex-grow: 1;
@@ -250,6 +247,41 @@
 
     .hidden {
       display: none !important;
+    }
+
+
+    /* =========================================
+       MOBILE RESPONSIVE ADJUSTMENTS
+       ========================================= */
+
+    @media screen and (max-width: 768px) {
+      body {
+        flex-direction: column;
+        height: auto;
+        overflow-y: auto;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-width: 100%;
+        height: auto;
+        max-height: 50vh;
+        border-right: none;
+        border-bottom: 2px solid #e5e7eb;
+      }
+
+      .preview-container {
+        width: 100%;
+        padding: 10px;
+        overflow-x: auto;
+      }
+
+      /* Scale down A4 preview for small screens */
+      #coverPage {
+        transform: scale(0.45);
+        transform-origin: top center;
+        margin-bottom: -150mm; /* Fix layout height after scale */
+      }
     }
 
 
@@ -290,6 +322,8 @@
         width: 210mm !important;
         height: 297mm !important;
         box-shadow: none !important;
+        transform: none !important;
+        margin-bottom: 0 !important;
         page-break-after: avoid !important;
         page-break-inside: avoid !important;
       }
