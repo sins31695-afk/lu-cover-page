@@ -265,22 +265,15 @@
         width: 100%;
         min-width: 100%;
         height: auto;
-        max-height: 50vh;
+        max-height: none;
         border-right: none;
         border-bottom: 2px solid #e5e7eb;
       }
 
       .preview-container {
         width: 100%;
-        padding: 10px;
+        padding: 15px 5px;
         overflow-x: auto;
-      }
-
-      /* Scale down A4 preview for small screens */
-      #coverPage {
-        transform: scale(0.45);
-        transform-origin: top center;
-        margin-bottom: -150mm; /* Fix layout height after scale */
       }
     }
 
@@ -322,8 +315,6 @@
         width: 210mm !important;
         height: 297mm !important;
         box-shadow: none !important;
-        transform: none !important;
-        margin-bottom: 0 !important;
         page-break-after: avoid !important;
         page-break-inside: avoid !important;
       }
