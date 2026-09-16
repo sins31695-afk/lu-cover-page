@@ -134,21 +134,17 @@
       height: 297mm;
       min-width: 210mm;
       min-height: 297mm;
-      max-width: 210mm;
-      max-height: 297mm;
 
       background: #ffffff;
-      padding: 20mm 22mm 18mm 22mm;
+      padding: 16mm 20mm 15mm 20mm;
 
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
 
       text-align: center;
       position: relative;
       box-shadow: 0 0 15px rgba(0,0,0,0.5);
-      overflow: hidden;
     }
 
 
@@ -156,31 +152,23 @@
        HEADER CONTENT (LOGO & VARSITY)
        ========================================= */
 
-    .header-section {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
     .logo {
-      width: 175px;
+      width: 145px;
       height: auto;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .university-name {
-      font-size: 26pt;
+      font-size: 24pt;
       font-weight: bold;
       color: #2b4c7e;
       margin: 2px 0;
-      line-height: 1.1;
     }
 
     .dept-name {
-      font-size: 17.5pt;
+      font-size: 16.5pt;
       color: #2b4c7e;
-      margin-top: 2px;
+      margin-bottom: 35px;
     }
 
 
@@ -188,32 +176,28 @@
        MIDDLE CONTENT (TITLE & TOPIC)
        ========================================= */
 
-    .middle-section {
-      width: 100%;
-      margin: 10px 0;
-    }
-
     .report-title {
       color: #c0392b;
-      font-size: 20pt;
+      font-size: 18pt;
       font-weight: bold;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .course-info {
-      font-size: 15pt;
+      font-size: 14pt;
       font-weight: bold;
       color: #000000;
-      margin: 5px 0;
+      margin: 4px 0;
     }
 
     .topic-title {
-      font-size: 15pt;
+      font-size: 14pt;
       font-weight: bold;
       color: #000000;
-      margin-top: 10px;
+      margin-top: 8px;
+      margin-bottom: 10px;
       padding: 0 5px;
-      line-height: 1.35;
+      line-height: 1.3;
     }
 
 
@@ -221,13 +205,9 @@
        FOOTER CONTENT (SUBMITTED INFO)
        ========================================= */
 
-    .footer-section {
-      width: 100%;
-    }
-
     .section-header {
       color: #2b4c7e;
-      font-size: 16pt;
+      font-size: 15pt;
       font-weight: bold;
       text-decoration: underline;
       margin-bottom: 6px;
@@ -235,18 +215,22 @@
 
     .info-block {
       width: 100%;
-      margin-bottom: 15px;
+      margin-top: 35px;
+    }
+
+    .submitted-by {
+      margin-top: 32px !important;
     }
 
     .info-text {
-      font-size: 14.5pt;
+      font-size: 14pt;
       color: #000000;
-      margin: 4px 0;
+      margin: 3px 0;
     }
 
     .footer-date {
-      margin-top: 10px;
-      font-size: 15pt;
+      margin-top: 45px;
+      font-size: 14.5pt;
       color: #2b4c7e;
       font-weight: bold;
       text-decoration: none;
@@ -263,13 +247,13 @@
 
 
     /* =========================================
-       PRINT / PDF OVERRIDES
+       NO HEADER/FOOTER PRINT STYLE
        ========================================= */
 
     @media print {
       @page {
         size: A4 portrait;
-        margin: 0;
+        margin: 0mm !important; /* Removes browser header/footer URL & Date */
       }
 
       html, body {
@@ -425,52 +409,44 @@
     <div id="coverPage">
 
       <!-- HEADER SECTION -->
-      <div class="header-section">
-        <img class="logo" src="lu.png" alt="Leading University Logo">
-        <div class="university-name">Leading University</div>
-        <div class="dept-name" id="outDept">Department of Computer Science and Engineering</div>
-      </div>
+      <img class="logo" src="lu.png" alt="Leading University Logo">
+      <div class="university-name">Leading University</div>
+      <div class="dept-name" id="outDept">Department of Computer Science and Engineering</div>
 
       <!-- MIDDLE SECTION -->
-      <div class="middle-section">
-        <div class="report-title" id="assignmentPreviewTitle">Assignment</div>
-        <div class="report-title hidden" id="labPreviewTitle">Lab Report - 01</div>
+      <div class="report-title" id="assignmentPreviewTitle">Assignment</div>
+      <div class="report-title hidden" id="labPreviewTitle">Lab Report - 01</div>
 
-        <div class="course-info">Course Title: <span id="outCourseTitle">Electrical Circuit Sessional</span></div>
-        <div class="course-info">Course Code: <span id="outCourseCode">EEE-1222</span></div>
+      <div class="course-info">Course Title: <span id="outCourseTitle">Electrical Circuit Sessional</span></div>
+      <div class="course-info">Course Code: <span id="outCourseCode">EEE-1222</span></div>
 
-        <div class="topic-title" id="assignmentPreviewTopic">
-          Assignment Name: <span id="outAssignmentName">Assignment Name</span>
-        </div>
+      <div class="topic-title" id="assignmentPreviewTopic">
+        Assignment Name: <span id="outAssignmentName">Assignment Name</span>
+      </div>
 
-        <div class="topic-title hidden" id="labPreviewTopic">
-          Title: <span id="outTopicTitle">Title of Lab Report</span>
-        </div>
+      <div class="topic-title hidden" id="labPreviewTopic">
+        Title: <span id="outTopicTitle">Title of Lab Report</span>
       </div>
 
       <!-- FOOTER SECTION -->
-      <div class="footer-section">
+      <div class="info-block">
+        <div class="section-header">Submitted To:</div>
+        <div class="info-text">Name: <span id="outTeacherName">Teacher Name</span></div>
+        <div class="info-text">Designation: <span id="outTeacherDesig">Lecturer</span></div>
+        <div class="info-text">Faculty: <span id="outTeacherFaculty">Department Of EEE</span></div>
+      </div>
 
-        <div class="info-block">
-          <div class="section-header">Submitted To:</div>
-          <div class="info-text">Name: <span id="outTeacherName">Teacher Name</span></div>
-          <div class="info-text">Designation: <span id="outTeacherDesig">Lecturer</span></div>
-          <div class="info-text">Faculty: <span id="outTeacherFaculty">Department Of EEE</span></div>
-        </div>
+      <div class="info-block submitted-by">
+        <div class="section-header">Submitted By:</div>
+        <div class="info-text">Name: <span id="outStudentName">Your Name</span></div>
+        <div class="info-text">Department: <span id="outStudentDept">Department Of CSE</span></div>
+        <div class="info-text">Batch: <span id="outBatch">67<sup>th</sup></span></div>
+        <div class="info-text">Section: <span id="outSection">D</span></div>
+        <div class="info-text" style="font-weight: bold; margin-top: 4px;">ID: <span id="outStudentId">0182500000000000</span></div>
+      </div>
 
-        <div class="info-block">
-          <div class="section-header">Submitted By:</div>
-          <div class="info-text">Name: <span id="outStudentName">Your Name</span></div>
-          <div class="info-text">Department: <span id="outStudentDept">Department Of CSE</span></div>
-          <div class="info-text">Batch: <span id="outBatch">67<sup>th</sup></span></div>
-          <div class="info-text">Section: <span id="outSection">D</span></div>
-          <div class="info-text" style="font-weight: bold; margin-top: 2px;">ID: <span id="outStudentId">0182500000000000</span></div>
-        </div>
-
-        <div class="footer-date">
-          Submission Date : <span id="outSubDate">19/09/2026</span>
-        </div>
-
+      <div class="footer-date">
+        Submission Date : <span id="outSubDate">19/09/2026</span>
       </div>
 
     </div>
@@ -553,7 +529,7 @@
     }
 
 
-    /* MOBILE-FRIENDLY PDF GENERATOR FIXED */
+    /* DIRECT PDF DOWNLOAD FUNCTION (PREVENTS GITHUB URL / BROWSER FOOTER) */
     function download1PagePDF() {
       const element = document.getElementById('coverPage');
       
@@ -565,7 +541,8 @@
           scale: 2, 
           useCORS: true, 
           logging: false,
-          windowWidth: 1024 // Phone viewport issue fixed
+          scrollX: 0,
+          scrollY: 0
         },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
