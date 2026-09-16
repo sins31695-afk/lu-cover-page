@@ -13,7 +13,7 @@
   <style>
 
     /* =========================================
-       GENERAL
+       GENERAL & RESET
        ========================================= */
 
     * {
@@ -36,11 +36,13 @@
 
     .sidebar {
       width: 360px;
+      min-width: 320px;
       background: #ffffff;
       padding: 18px;
       border-right: 1px solid #e5e7eb;
       overflow-y: auto;
       font-family: Arial, sans-serif;
+      z-index: 10;
     }
 
     .sidebar h2 {
@@ -116,7 +118,7 @@
     .preview-container {
       flex: 1;
       padding: 20px;
-      overflow-y: auto;
+      overflow: auto;
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -124,186 +126,135 @@
 
 
     /* =========================================
-       STRICT A4 PAGE (INCREASED PADDING)
+       STRICT A4 PAGE SETUP
        ========================================= */
 
     #coverPage {
       width: 210mm;
       height: 297mm;
+      min-width: 210mm;
       min-height: 297mm;
+      max-width: 210mm;
+      max-height: 297mm;
 
       background: #ffffff;
-
-      padding: 22mm 22mm 20mm 22mm;
+      padding: 20mm 22mm 18mm 22mm;
 
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: space-between;
 
       text-align: center;
-
       position: relative;
-
       box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      overflow: hidden;
     }
 
 
     /* =========================================
-       LOGO (SCALED UP)
+       HEADER CONTENT (LOGO & VARSITY)
        ========================================= */
+
+    .header-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
     .logo {
       width: 175px;
       height: auto;
-
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
-
-
-    /* =========================================
-       UNIVERSITY NAME (SCALED UP)
-       ========================================= */
 
     .university-name {
       font-size: 26pt;
       font-weight: bold;
       color: #2b4c7e;
-
-      margin: 4px 0;
+      margin: 2px 0;
+      line-height: 1.1;
     }
-
-
-    /* =========================================
-       DEPARTMENT (SCALED UP)
-       ========================================= */
 
     .dept-name {
-      font-size: 18pt;
+      font-size: 17.5pt;
       color: #2b4c7e;
-
-      margin-bottom: 50px;
+      margin-top: 2px;
     }
 
 
     /* =========================================
-       REPORT / ASSIGNMENT TITLE (SCALED UP)
+       MIDDLE CONTENT (TITLE & TOPIC)
        ========================================= */
+
+    .middle-section {
+      width: 100%;
+      margin: 10px 0;
+    }
 
     .report-title {
       color: #c0392b;
-
       font-size: 20pt;
       font-weight: bold;
-
-      margin-bottom: 20px;
+      margin-bottom: 14px;
     }
-
-
-    /* =========================================
-       COURSE INFORMATION (SCALED UP)
-       ========================================= */
 
     .course-info {
-      font-size: 15.5pt;
+      font-size: 15pt;
       font-weight: bold;
-
       color: #000000;
-
-      margin: 6px 0;
+      margin: 5px 0;
     }
-
-
-    /* =========================================
-       TOPIC (SCALED UP)
-       ========================================= */
 
     .topic-title {
-      font-size: 15.5pt;
+      font-size: 15pt;
       font-weight: bold;
-
       color: #000000;
-
-      margin-top: 14px;
-
-      margin-bottom: 20px;
-
-      padding: 0 10px;
-
-      line-height: 1.4;
+      margin-top: 10px;
+      padding: 0 5px;
+      line-height: 1.35;
     }
 
 
     /* =========================================
-       SECTION HEADER (SCALED UP)
+       FOOTER CONTENT (SUBMITTED INFO)
        ========================================= */
+
+    .footer-section {
+      width: 100%;
+    }
 
     .section-header {
       color: #2b4c7e;
-
-      font-size: 16.5pt;
+      font-size: 16pt;
       font-weight: bold;
-
       text-decoration: underline;
-
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
-
-
-    /* =========================================
-       INFO BLOCK (SCALED UP)
-       ========================================= */
 
     .info-block {
       width: 100%;
-
-      margin-top: 55px;
+      margin-bottom: 15px;
     }
-
-
-    /* =========================================
-       SUBMITTED BY (SCALED UP)
-       ========================================= */
-
-    .submitted-by {
-      margin-top: 50px !important;
-    }
-
-
-    /* =========================================
-       INFO TEXT (SCALED UP)
-       ========================================= */
 
     .info-text {
-      font-size: 15pt;
-
+      font-size: 14.5pt;
       color: #000000;
-
-      margin: 6px 0;
+      margin: 4px 0;
     }
-
-
-    /* =========================================
-       SUBMISSION DATE (SCALED UP)
-       ========================================= */
 
     .footer-date {
-
-      margin-top: auto;
-
-      font-size: 15.5pt;
-
+      margin-top: 10px;
+      font-size: 15pt;
       color: #2b4c7e;
-
       font-weight: bold;
-
       text-decoration: none;
-
-      padding-bottom: 10mm;
     }
 
 
     /* =========================================
-       ASSIGNMENT / LAB REPORT PREVIEW
+       HIDDEN CLASS
        ========================================= */
 
     .hidden {
@@ -312,98 +263,51 @@
 
 
     /* =========================================
-       PRINT / PDF
+       PRINT / PDF OVERRIDES
        ========================================= */
 
     @media print {
-
       @page {
         size: A4 portrait;
         margin: 0;
       }
 
-      html,
-      body {
-
+      html, body {
         width: 210mm;
         height: 297mm;
-
         margin: 0 !important;
         padding: 0 !important;
-
         background: #ffffff !important;
-
         overflow: hidden !important;
       }
-
-      body {
-        display: block !important;
-      }
-
-
-      /* Sidebar hide */
 
       .sidebar {
         display: none !important;
       }
 
-
-      /* Preview container */
-
       .preview-container {
-
         display: block !important;
-
         width: 210mm !important;
         height: 297mm !important;
-
         padding: 0 !important;
         margin: 0 !important;
-
-        overflow: visible !important;
+        overflow: hidden !important;
       }
-
-
-      /* Only A4 cover */
 
       #coverPage {
-
         display: flex !important;
-
         width: 210mm !important;
         height: 297mm !important;
-
-        min-height: 297mm !important;
-
-        margin: 0 !important;
-
-        padding: 22mm 22mm 20mm 22mm !important;
-
         box-shadow: none !important;
-
         page-break-after: avoid !important;
         page-break-inside: avoid !important;
-
-        break-after: avoid-page !important;
-        break-inside: avoid !important;
-      }
-
-
-      #coverPage * {
-
-        -webkit-print-color-adjust: exact !important;
-
-        print-color-adjust: exact !important;
       }
     }
 
   </style>
-
 </head>
 
-
 <body>
-
 
   <!-- =========================================
        LEFT INFORMATION EDITOR
@@ -413,365 +317,103 @@
 
     <h2>Information Editor</h2>
 
-
-    <!-- =========================================
-         COVER PAGE TYPE
-         ========================================= -->
-
     <div class="form-group">
-
-      <label>
-        Cover Page Type
-      </label>
-
-      <select
-        id="coverType"
-        onchange="changeCoverType()"
-      >
-
-        <option value="assignment">
-          Assignment
-        </option>
-
-        <option value="lab">
-          Lab Report
-        </option>
-
+      <label>Cover Page Type</label>
+      <select id="coverType" onchange="changeCoverType()">
+        <option value="assignment">Assignment</option>
+        <option value="lab">Lab Report</option>
       </select>
-
     </div>
-
-
-    <!-- =========================================
-         DEPARTMENT
-         ========================================= -->
 
     <div class="form-group">
-
-      <label>
-        Department Name
-      </label>
-
-      <input
-        type="text"
-        id="inDept"
-        value="Department of Computer Science and Engineering"
-        oninput="updatePreview()"
-      >
-
+      <label>Department Name</label>
+      <input type="text" id="inDept" value="Department of Computer Science and Engineering" oninput="updatePreview()">
     </div>
 
-
-    <!-- =========================================
-         ASSIGNMENT NAME
-         ========================================= -->
-
-    <div
-      class="form-group"
-      id="assignmentNameGroup"
-    >
-
-      <label>
-        Assignment Name
-      </label>
-
-      <input
-        type="text"
-        id="inAssignmentName"
-        value=".............."
-        oninput="updatePreview()"
-      >
-
+    <div class="form-group" id="assignmentNameGroup">
+      <label>Assignment Name</label>
+      <input type="text" id="inAssignmentName" value=".............." oninput="updatePreview()">
     </div>
 
-
-    <!-- =========================================
-         LAB REPORT NO
-         ========================================= -->
-
-    <div
-      class="form-group hidden"
-      id="labReportNoGroup"
-    >
-
-      <label>
-        Lab Report No
-      </label>
-
-      <input
-        type="text"
-        id="inReportNo"
-        value="01"
-        oninput="updatePreview()"
-      >
-
+    <div class="form-group hidden" id="labReportNoGroup">
+      <label>Lab Report No</label>
+      <input type="text" id="inReportNo" value="01" oninput="updatePreview()">
     </div>
 
-
-    <!-- =========================================
-         LAB REPORT TITLE
-         ========================================= -->
-
-    <div
-      class="form-group hidden"
-      id="labReportTitleGroup"
-    >
-
-      <label>
-        Lab Report Title
-      </label>
-
-      <textarea
-        id="inTopicTitle"
-        rows="3"
-        oninput="updatePreview()"
-      >Title of Lab Report</textarea>
-
+    <div class="form-group hidden" id="labReportTitleGroup">
+      <label>Lab Report Title</label>
+      <textarea id="inTopicTitle" rows="3" oninput="updatePreview()">Title of Lab Report</textarea>
     </div>
-
-
-    <!-- =========================================
-         COURSE TITLE
-         ========================================= -->
 
     <div class="form-group">
-
-      <label>
-        Course Title
-      </label>
-
-      <input
-        type="text"
-        id="inCourseTitle"
-        value="................"
-        oninput="updatePreview()"
-      >
-
+      <label>Course Title</label>
+      <input type="text" id="inCourseTitle" value="................" oninput="updatePreview()">
     </div>
-
-
-    <!-- =========================================
-         COURSE CODE
-         ========================================= -->
 
     <div class="form-group">
-
-      <label>
-        Course Code
-      </label>
-
-      <input
-        type="text"
-        id="inCourseCode"
-        value="......."
-        oninput="updatePreview()"
-      >
-
+      <label>Course Code</label>
+      <input type="text" id="inCourseCode" value="......." oninput="updatePreview()">
     </div>
 
-
-    <!-- =========================================
-         ASSIGNMENT TOPIC
-         ========================================= -->
-
-    <div
-      class="form-group"
-      id="assignmentTopicGroup"
-    >
-
-      <label>
-        Assignment Topic / Name
-      </label>
-
-      <textarea
-        id="inAssignmentTopic"
-        rows="3"
-        oninput="updatePreview()"
-      >Title of Assignment</textarea>
-
+    <div class="form-group" id="assignmentTopicGroup">
+      <label>Assignment Topic / Name</label>
+      <textarea id="inAssignmentTopic" rows="3" oninput="updatePreview()">Title of Assignment</textarea>
     </div>
 
-
-    <!-- =========================================
-         SUBMITTED TO
-         ========================================= -->
-
-    <h3>
-      Submitted To
-    </h3>
-
+    <h3>Submitted To</h3>
 
     <div class="form-group">
-
-      <label>
-        Teacher Name
-      </label>
-
-      <input
-        type="text"
-        id="inTeacherName"
-        value="Teacher Name"
-        oninput="updatePreview()"
-      >
-
+      <label>Teacher Name</label>
+      <input type="text" id="inTeacherName" value="Teacher Name" oninput="updatePreview()">
     </div>
-
 
     <div class="form-group">
-
-      <label>
-        Designation
-      </label>
-
-      <input
-        type="text"
-        id="inTeacherDesig"
-        value="Lecturer"
-        oninput="updatePreview()"
-      >
-
+      <label>Designation</label>
+      <input type="text" id="inTeacherDesig" value="Lecturer" oninput="updatePreview()">
     </div>
-
 
     <div class="form-group">
-
-      <label>
-        Faculty / Dept
-      </label>
-
-      <input
-        type="text"
-        id="inTeacherFaculty"
-        value="Department of EEE/CSE (teacher)"
-        oninput="updatePreview()"
-      >
-
+      <label>Faculty / Dept</label>
+      <input type="text" id="inTeacherFaculty" value="Department of EEE/CSE (teacher)" oninput="updatePreview()">
     </div>
 
-
-    <!-- =========================================
-         SUBMITTED BY
-         ========================================= -->
-
-    <h3>
-      Submitted By
-    </h3>
-
+    <h3>Submitted By</h3>
 
     <div class="form-group">
-
-      <label>
-        Student Name
-      </label>
-
-      <input
-        type="text"
-        id="inStudentName"
-        value="Your Name"
-        oninput="updatePreview()"
-      >
-
+      <label>Student Name</label>
+      <input type="text" id="inStudentName" value="Your Name" oninput="updatePreview()">
     </div>
-
 
     <div class="form-group">
-
-      <label>
-        Student Department
-      </label>
-
-      <input
-        type="text"
-        id="inStudentDept"
-        value="CSE"
-        oninput="updatePreview()"
-      >
-
+      <label>Student Department</label>
+      <input type="text" id="inStudentDept" value="CSE" oninput="updatePreview()">
     </div>
-
 
     <div class="form-group">
-
-      <label>
-        Batch
-      </label>
-
-      <input
-        type="text"
-        id="inBatch"
-        value="67th"
-        oninput="updatePreview()"
-      >
-
+      <label>Batch</label>
+      <input type="text" id="inBatch" value="67th" oninput="updatePreview()">
     </div>
-
 
     <div class="form-group">
-
-      <label>
-        Section
-      </label>
-
-      <input
-        type="text"
-        id="inSection"
-        value="D"
-        oninput="updatePreview()"
-      >
-
+      <label>Section</label>
+      <input type="text" id="inSection" value="D" oninput="updatePreview()">
     </div>
-
 
     <div class="form-group">
-
-      <label>
-        Student ID
-      </label>
-
-      <input
-        type="text"
-        id="inStudentId"
-        value="0182500000000000"
-        oninput="updatePreview()"
-      >
-
+      <label>Student ID</label>
+      <input type="text" id="inStudentId" value="0182500000000000" oninput="updatePreview()">
     </div>
-
-
-    <!-- =========================================
-         SUBMISSION DATE
-         ========================================= -->
 
     <div class="form-group">
-
-      <label>
-        Submission Date
-      </label>
-
-      <input
-        type="text"
-        id="inSubDate"
-        value="19/09/2026"
-        oninput="updatePreview()"
-      >
-
+      <label>Submission Date</label>
+      <input type="text" id="inSubDate" value="19/09/2026" oninput="updatePreview()">
     </div>
 
-
-    <!-- =========================================
-         PDF BUTTON
-         ========================================= -->
-
-    <button
-      class="btn-download"
-      onclick="download1PagePDF()"
-    >
+    <button class="btn-download" onclick="download1PagePDF()">
       📥 Download 1-Page PDF
     </button>
 
-
   </div>
-
 
 
   <!-- =========================================
@@ -782,257 +424,58 @@
 
     <div id="coverPage">
 
-
-      <!-- =====================================
-           LOGO
-           ===================================== -->
-
-      <img
-        class="logo"
-        src="lu.png"
-        alt="Leading University Logo"
-      >
-
-
-      <!-- =====================================
-           UNIVERSITY
-           ===================================== -->
-
-      <div class="university-name">
-        Leading University
+      <!-- HEADER SECTION -->
+      <div class="header-section">
+        <img class="logo" src="lu.png" alt="Leading University Logo">
+        <div class="university-name">Leading University</div>
+        <div class="dept-name" id="outDept">Department of Computer Science and Engineering</div>
       </div>
 
+      <!-- MIDDLE SECTION -->
+      <div class="middle-section">
+        <div class="report-title" id="assignmentPreviewTitle">Assignment</div>
+        <div class="report-title hidden" id="labPreviewTitle">Lab Report - 01</div>
 
-      <div
-        class="dept-name"
-        id="outDept"
-      >
-        Department of Computer Science and Engineering
-      </div>
+        <div class="course-info">Course Title: <span id="outCourseTitle">Electrical Circuit Sessional</span></div>
+        <div class="course-info">Course Code: <span id="outCourseCode">EEE-1222</span></div>
 
-
-      <!-- =====================================
-           ASSIGNMENT TITLE
-           ===================================== -->
-
-      <div
-        class="report-title"
-        id="assignmentPreviewTitle"
-      >
-        Assignment
-      </div>
-
-
-      <!-- =====================================
-           LAB REPORT TITLE
-           ===================================== -->
-
-      <div
-        class="report-title hidden"
-        id="labPreviewTitle"
-      >
-        Lab Report - 01
-      </div>
-
-
-      <!-- =====================================
-           COURSE
-           ===================================== -->
-
-      <div class="course-info">
-
-        Course Title:
-
-        <span id="outCourseTitle">
-          Electrical Circuit Sessional
-        </span>
-
-      </div>
-
-
-      <div class="course-info">
-
-        Course Code:
-
-        <span id="outCourseCode">
-          EEE-1222
-        </span>
-
-      </div>
-
-
-      <!-- =====================================
-           ASSIGNMENT NAME / TOPIC
-           ===================================== -->
-
-      <div
-        class="topic-title"
-        id="assignmentPreviewTopic"
-      >
-
-        Assignment Name:
-
-        <span id="outAssignmentName">
-          Assignment Name
-        </span>
-
-      </div>
-
-
-      <!-- =====================================
-           LAB REPORT TITLE / TOPIC
-           ===================================== -->
-
-      <div
-        class="topic-title hidden"
-        id="labPreviewTopic"
-      >
-
-        Title:
-
-        <span id="outTopicTitle">
-          Title of Lab Report
-        </span>
-
-      </div>
-
-
-      <!-- =====================================
-           SUBMITTED TO
-           ===================================== -->
-
-      <div class="info-block">
-
-        <div class="section-header">
-          Submitted To:
+        <div class="topic-title" id="assignmentPreviewTopic">
+          Assignment Name: <span id="outAssignmentName">Assignment Name</span>
         </div>
 
+        <div class="topic-title hidden" id="labPreviewTopic">
+          Title: <span id="outTopicTitle">Title of Lab Report</span>
+        </div>
+      </div>
 
-        <div class="info-text">
+      <!-- FOOTER SECTION -->
+      <div class="footer-section">
 
-          Name:
-
-          <span id="outTeacherName">
-            Teacher Name
-          </span>
-
+        <div class="info-block">
+          <div class="section-header">Submitted To:</div>
+          <div class="info-text">Name: <span id="outTeacherName">Teacher Name</span></div>
+          <div class="info-text">Designation: <span id="outTeacherDesig">Lecturer</span></div>
+          <div class="info-text">Faculty: <span id="outTeacherFaculty">Department Of EEE</span></div>
         </div>
 
-
-        <div class="info-text">
-
-          Designation:
-
-          <span id="outTeacherDesig">
-            Lecturer
-          </span>
-
+        <div class="info-block">
+          <div class="section-header">Submitted By:</div>
+          <div class="info-text">Name: <span id="outStudentName">Your Name</span></div>
+          <div class="info-text">Department: <span id="outStudentDept">Department Of CSE</span></div>
+          <div class="info-text">Batch: <span id="outBatch">67<sup>th</sup></span></div>
+          <div class="info-text">Section: <span id="outSection">D</span></div>
+          <div class="info-text" style="font-weight: bold; margin-top: 2px;">ID: <span id="outStudentId">0182500000000000</span></div>
         </div>
 
-
-        <div class="info-text">
-
-          Faculty:
-
-          <span id="outTeacherFaculty">
-            Department Of EEE
-          </span>
-
+        <div class="footer-date">
+          Submission Date : <span id="outSubDate">19/09/2026</span>
         </div>
 
       </div>
-
-
-      <!-- =====================================
-           SUBMITTED BY
-           ===================================== -->
-
-      <div class="info-block submitted-by">
-
-        <div class="section-header">
-          Submitted By:
-        </div>
-
-
-        <div class="info-text">
-
-          Name:
-
-          <span id="outStudentName">
-            Your Name
-          </span>
-
-        </div>
-
-
-        <div class="info-text">
-
-          Department:
-
-          <span id="outStudentDept">
-            Department Of CSE
-          </span>
-
-        </div>
-
-
-        <div class="info-text">
-
-          Batch:
-
-          <span id="outBatch">
-            67<sup>th</sup>
-          </span>
-
-        </div>
-
-
-        <div class="info-text">
-
-          Section:
-
-          <span id="outSection">
-            D
-          </span>
-
-        </div>
-
-
-        <div
-          class="info-text"
-          style="font-weight: bold; margin-top: 4px;"
-        >
-
-          ID:
-
-          <span id="outStudentId">
-            0182500000000000
-          </span>
-
-        </div>
-
-      </div>
-
-
-      <!-- =====================================
-           SUBMISSION DATE
-           ===================================== -->
-
-      <div class="footer-date">
-
-        Submission Date :
-
-        <span id="outSubDate">
-          19/09/2026
-        </span>
-
-      </div>
-
 
     </div>
 
   </div>
-
 
 
   <!-- =========================================
@@ -1041,267 +484,99 @@
 
   <script>
 
-
-    /* =========================================
-       CHANGE COVER TYPE
-       ========================================= */
-
     function changeCoverType() {
+      const type = document.getElementById('coverType').value;
 
-      const type =
-        document.getElementById('coverType').value;
+      const assignmentNameGroup = document.getElementById('assignmentNameGroup');
+      const labReportNoGroup = document.getElementById('labReportNoGroup');
+      const labReportTitleGroup = document.getElementById('labReportTitleGroup');
+      const assignmentTopicGroup = document.getElementById('assignmentTopicGroup');
 
-
-      const assignmentNameGroup =
-        document.getElementById('assignmentNameGroup');
-
-      const labReportNoGroup =
-        document.getElementById('labReportNoGroup');
-
-      const labReportTitleGroup =
-        document.getElementById('labReportTitleGroup');
-
-      const assignmentTopicGroup =
-        document.getElementById('assignmentTopicGroup');
-
-
-      const assignmentPreviewTitle =
-        document.getElementById('assignmentPreviewTitle');
-
-      const labPreviewTitle =
-        document.getElementById('labPreviewTitle');
-
-      const assignmentPreviewTopic =
-        document.getElementById('assignmentPreviewTopic');
-
-      const labPreviewTopic =
-        document.getElementById('labPreviewTopic');
-
-
-      /* =====================================
-         ASSIGNMENT
-         ===================================== */
+      const assignmentPreviewTitle = document.getElementById('assignmentPreviewTitle');
+      const labPreviewTitle = document.getElementById('labPreviewTitle');
+      const assignmentPreviewTopic = document.getElementById('assignmentPreviewTopic');
+      const labPreviewTopic = document.getElementById('labPreviewTopic');
 
       if (type === 'assignment') {
-
         assignmentNameGroup.classList.remove('hidden');
-
         assignmentTopicGroup.classList.add('hidden');
-
         labReportNoGroup.classList.add('hidden');
-
         labReportTitleGroup.classList.add('hidden');
 
-
         assignmentPreviewTitle.classList.remove('hidden');
-
         labPreviewTitle.classList.add('hidden');
-
         assignmentPreviewTopic.classList.remove('hidden');
-
         labPreviewTopic.classList.add('hidden');
-
-      }
-
-
-      /* =====================================
-         LAB REPORT
-         ===================================== */
-
-      else {
-
+      } else {
         assignmentNameGroup.classList.add('hidden');
-
         assignmentTopicGroup.classList.add('hidden');
-
         labReportNoGroup.classList.remove('hidden');
-
         labReportTitleGroup.classList.remove('hidden');
 
-
         assignmentPreviewTitle.classList.add('hidden');
-
         labPreviewTitle.classList.remove('hidden');
-
         assignmentPreviewTopic.classList.add('hidden');
-
         labPreviewTopic.classList.remove('hidden');
-
       }
 
-
       updatePreview();
-
     }
 
-
-
-    /* =========================================
-       UPDATE PREVIEW
-       ========================================= */
 
     function updatePreview() {
+      document.getElementById('outDept').innerText = document.getElementById('inDept').value;
+      document.getElementById('outCourseTitle').innerText = document.getElementById('inCourseTitle').value;
+      document.getElementById('outCourseCode').innerText = document.getElementById('inCourseCode').value;
+      document.getElementById('outAssignmentName').innerText = document.getElementById('inAssignmentName').value;
+      document.getElementById('assignmentPreviewTitle').innerText = 'Assignment';
 
+      const reportNo = document.getElementById('inReportNo').value;
+      const reportTitle = document.getElementById('inTopicTitle').value;
 
-      /* =====================================
-         DEPARTMENT
-         ===================================== */
+      document.getElementById('labPreviewTitle').innerText = 'Lab Report - ' + reportNo;
+      document.getElementById('outTopicTitle').innerText = reportTitle;
 
-      document.getElementById('outDept').innerText =
-        document.getElementById('inDept').value;
+      document.getElementById('outTeacherName').innerText = document.getElementById('inTeacherName').value;
+      document.getElementById('outTeacherDesig').innerText = document.getElementById('inTeacherDesig').value;
+      document.getElementById('outTeacherFaculty').innerText = document.getElementById('inTeacherFaculty').value;
 
+      document.getElementById('outStudentName').innerText = document.getElementById('inStudentName').value;
+      document.getElementById('outStudentDept').innerText = document.getElementById('inStudentDept').value;
 
-      /* =====================================
-         COURSE
-         ===================================== */
+      let batchVal = document.getElementById('inBatch').value;
+      batchVal = batchVal.replace(/(th|st|nd|rd)/gi, '<sup>$1</sup>');
+      document.getElementById('outBatch').innerHTML = batchVal;
 
-      document.getElementById('outCourseTitle').innerText =
-        document.getElementById('inCourseTitle').value;
-
-
-      document.getElementById('outCourseCode').innerText =
-        document.getElementById('inCourseCode').value;
-
-
-      /* =====================================
-         ASSIGNMENT
-         ===================================== */
-
-      document.getElementById('outAssignmentName').innerText =
-        document.getElementById('inAssignmentName').value;
-
-
-      document.getElementById('assignmentPreviewTitle').innerText =
-        'Assignment';
-
-
-      /* =====================================
-         LAB REPORT
-         ===================================== */
-
-      const reportNo =
-        document.getElementById('inReportNo').value;
-
-      const reportTitle =
-        document.getElementById('inTopicTitle').value;
-
-
-      document.getElementById('labPreviewTitle').innerText =
-        'Lab Report - ' + reportNo;
-
-
-      document.getElementById('outTopicTitle').innerText =
-        reportTitle;
-
-
-      /* =====================================
-         TEACHER
-         ===================================== */
-
-      document.getElementById('outTeacherName').innerText =
-        document.getElementById('inTeacherName').value;
-
-
-      document.getElementById('outTeacherDesig').innerText =
-        document.getElementById('inTeacherDesig').value;
-
-
-      document.getElementById('outTeacherFaculty').innerText =
-        document.getElementById('inTeacherFaculty').value;
-
-
-      /* =====================================
-         STUDENT
-         ===================================== */
-
-      document.getElementById('outStudentName').innerText =
-        document.getElementById('inStudentName').value;
-
-
-      document.getElementById('outStudentDept').innerText =
-        document.getElementById('inStudentDept').value;
-
-
-      /* =====================================
-         BATCH
-         ===================================== */
-
-      let batchVal =
-        document.getElementById('inBatch').value;
-
-
-      batchVal =
-        batchVal.replace(
-          /(th|st|nd|rd)/gi,
-          '<sup>$1</sup>'
-        );
-
-
-      document.getElementById('outBatch').innerHTML =
-        batchVal;
-
-
-      /* =====================================
-         SECTION
-         ========================================= */
-
-      document.getElementById('outSection').innerText =
-        document.getElementById('inSection').value;
-
-
-      /* =====================================
-         ID
-         ===================================== */
-
-      document.getElementById('outStudentId').innerText =
-        document.getElementById('inStudentId').value;
-
-
-      /* =====================================
-         DATE
-         ===================================== */
-
-      document.getElementById('outSubDate').innerText =
-        document.getElementById('inSubDate').value;
-
+      document.getElementById('outSection').innerText = document.getElementById('inSection').value;
+      document.getElementById('outStudentId').innerText = document.getElementById('inStudentId').value;
+      document.getElementById('outSubDate').innerText = document.getElementById('inSubDate').value;
     }
 
 
-
-    /* =========================================
-       PDF GENERATOR (UPDATED HTML2PDF)
-       ========================================= */
-
+    /* MOBILE-FRIENDLY PDF GENERATOR FIXED */
     function download1PagePDF() {
-
       const element = document.getElementById('coverPage');
       
       const opt = {
         margin:       0,
         filename:     'Leading_University_Cover_Page.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, logging: false },
+        html2canvas:  { 
+          scale: 2, 
+          useCORS: true, 
+          logging: false,
+          windowWidth: 1024 // Phone viewport issue fixed
+        },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
       html2pdf().set(opt).from(element).save();
-
     }
 
-
-
-    /* =========================================
-       INITIAL LOAD
-       ========================================= */
-
     changeCoverType();
-
     updatePreview();
-
 
   </script>
 
-
 </body>
-
 </html>
