@@ -126,7 +126,7 @@
 
 
     /* =========================================
-       STRICT A4 PAGE SETUP (MATCHED IMAGE LAYOUT)
+       STRICT A4 PAGE SETUP
        ========================================= */
 
     #coverPage {
@@ -136,7 +136,7 @@
       min-height: 297mm;
 
       background: #ffffff;
-      padding: 18mm 20mm 18mm 20mm;
+      padding: 18mm 20mm 15mm 20mm;
 
       display: flex;
       flex-direction: column;
@@ -205,7 +205,7 @@
 
 
     /* =========================================
-       FOOTER CONTENT (SUBMITTED INFO)
+       FOOTER CONTENT (SUBMITTED INFO & DATE)
        ========================================= */
 
     .section-header {
@@ -222,6 +222,7 @@
 
     .submitted-by {
       margin-top: 45px !important;
+      flex-grow: 1; /* Pushes the submission date to the bottom */
     }
 
     .info-text {
@@ -231,12 +232,12 @@
     }
 
     .footer-date {
-      margin-top: auto;
+      margin-top: auto; /* Bottom positioning */
       font-size: 14.5pt;
       color: #2b4c7e;
       font-weight: bold;
       text-decoration: none;
-      padding-bottom: 10px;
+      padding-bottom: 5px;
     }
 
 
