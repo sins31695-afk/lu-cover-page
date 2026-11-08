@@ -1,3 +1,19 @@
+আপনার দেওয়া ইমেজ এবং রিকোয়ারমেন্ট অনুযায়ী **"Contest Report"** অপশনটি যুক্ত করা হয়েছে। 
+
+### কী কী পরিবর্তন ও ফিচার যুক্ত করা হয়েছে:
+1. **কভার পেজ টাইপ:** `Cover Page Type` ড্রপডাউনে নতুন **"Contest Report"** অপশন যোগ করা হয়েছে।
+2. **লেআউট হুবহু ইমেজের মতো:**
+   - লোগোর নিচে সরাসরি **Course Name**, **Course Code** এবং আন্ডারলাইন করা **Contest Report** টাইটেল।
+   - মাঝখানে চমৎকার দুটি বর্ডারযুক্ত বক্স:
+     - **বাম বক্সে (Submitted to):** শিক্ষক মহাশয়ের নাম, পদবি, ডিপার্টমেন্ট এবং `Leading University, Sylhet`।
+     - **মাঝখানে:** ইমেজের মতো লম্বা পার্টিশন লাইন (Vertical Divider)।
+     - **ডান বক্সে (Submitted by):** শিক্ষার্থীর নাম, `ID:xxxx`, `Batch:67ᵗʰ Sec: D`, ডিপার্টমেন্ট এবং `Leading University, Sylhet`।
+3. **সাবমিশন ডেট নিচে অবস্থান:** আপনার কথামতো `Submission : DD-MM-YYYY` আগের কভার পেজগুলোর মতোই স্বয়ংক্রিয়ভাবে পেজের একদম নিচে (`margin-top: auto`) বসবে।
+4. **সম্পূর্ণ ডাইনামিক এডিটর:** সাইডবার থেকে কোর্সের নাম, কোড, শিক্ষক ও শিক্ষার্থীর সকল তথ্য সহজেই পরিবর্তন করা যাবে এবং রিয়েল-টাইমে প্রিভিউ দেখা ও ১-ক্লিকে PDF ডাউনলোড করা যাবে।
+
+সম্পূর্ণ আপডেট করা কোডটি নিচে দেওয়া হলো:
+
+```html
 <!DOCTYPE html>
 <html lang="bn">
 
@@ -172,7 +188,7 @@
 
 
     /* =========================================
-       MIDDLE CONTENT (TITLE & TOPIC)
+       MIDDLE CONTENT (TITLE & TOPIC) - ASSIGNMENT / LAB
        ========================================= */
 
     .middle-section {
@@ -201,6 +217,85 @@
       margin-top: 6px;
       padding: 0 5px;
       line-height: 1.3;
+    }
+
+
+    /* =========================================
+       CONTEST REPORT SPECIFIC STYLES
+       ========================================= */
+
+    .contest-middle-section {
+      margin-top: 35px;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .contest-course-info {
+      font-size: 14pt;
+      font-weight: bold;
+      color: #000000;
+      margin: 4px 0;
+    }
+
+    .contest-report-title {
+      font-size: 15.5pt;
+      font-weight: bold;
+      color: #000000;
+      text-decoration: underline;
+      margin-top: 10px;
+    }
+
+    .contest-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 25px;
+      position: relative;
+    }
+
+    .contest-box {
+      width: 75mm;
+      height: 72mm;
+      border: 1.5px solid #000000;
+      padding: 16px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background: #ffffff;
+      box-sizing: border-box;
+    }
+
+    .contest-box-header {
+      font-size: 13.5pt;
+      font-weight: bold;
+      color: #000000;
+      text-decoration: underline;
+      margin-bottom: 10px;
+    }
+
+    .contest-box-text {
+      font-size: 12.5pt;
+      color: #000000;
+      margin: 2px 0;
+      line-height: 1.25;
+      width: 100%;
+    }
+
+    .contest-box-varsity {
+      font-size: 12.5pt;
+      color: #000000;
+      margin-top: 10px;
+      line-height: 1.25;
+      width: 100%;
+    }
+
+    .contest-divider-line {
+      width: 1.2px;
+      background-color: #000000;
+      height: 86mm;
+      margin: 0 8mm;
     }
 
 
@@ -338,11 +433,12 @@
       <select id="coverType" onchange="changeCoverType()">
         <option value="assignment">Assignment</option>
         <option value="lab">Lab Report</option>
+        <option value="contest">Contest Report</option>
       </select>
     </div>
 
-    <div class="form-group">
-      <label>Department Name</label>
+    <div class="form-group" id="deptGroup">
+      <label>Department Name (Header)</label>
       <input type="text" id="inDept" value="Department of Computer Science and Engineering" oninput="updatePreview()">
     </div>
 
@@ -361,14 +457,19 @@
       <textarea id="inTopicTitle" rows="3" oninput="updatePreview()">Title of Lab Report</textarea>
     </div>
 
+    <div class="form-group hidden" id="contestTitleGroup">
+      <label>Report Title</label>
+      <input type="text" id="inContestTitle" value="Contest Report" oninput="updatePreview()">
+    </div>
+
     <div class="form-group">
-      <label>Course Title</label>
-      <input type="text" id="inCourseTitle" value="................" oninput="updatePreview()">
+      <label id="courseTitleLabel">Course Title</label>
+      <input type="text" id="inCourseTitle" value="Data Structures" oninput="updatePreview()">
     </div>
 
     <div class="form-group">
       <label>Course Code</label>
-      <input type="text" id="inCourseCode" value="......." oninput="updatePreview()">
+      <input type="text" id="inCourseCode" value="CSE-2111" oninput="updatePreview()">
     </div>
 
     <div class="form-group" id="assignmentTopicGroup">
@@ -380,7 +481,7 @@
 
     <div class="form-group">
       <label>Teacher Name</label>
-      <input type="text" id="inTeacherName" value="Teacher Name" oninput="updatePreview()">
+      <input type="text" id="inTeacherName" value="Abdulla Al Mahmud" oninput="updatePreview()">
     </div>
 
     <div class="form-group">
@@ -390,19 +491,19 @@
 
     <div class="form-group">
       <label>Faculty / Dept</label>
-      <input type="text" id="inTeacherFaculty" value="Department of EEE/CSE (teacher)" oninput="updatePreview()">
+      <input type="text" id="inTeacherFaculty" value="Department of Computer Science and Engineering" oninput="updatePreview()">
     </div>
 
     <h3>Submitted By</h3>
 
     <div class="form-group">
       <label>Student Name</label>
-      <input type="text" id="inStudentName" value="Your Name" oninput="updatePreview()">
+      <input type="text" id="inStudentName" value="Avishek Dash Jibon" oninput="updatePreview()">
     </div>
 
     <div class="form-group">
       <label>Student Department</label>
-      <input type="text" id="inStudentDept" value="CSE" oninput="updatePreview()">
+      <input type="text" id="inStudentDept" value="Department of Computer Science and Engineering" oninput="updatePreview()">
     </div>
 
     <div class="form-group">
@@ -417,12 +518,17 @@
 
     <div class="form-group">
       <label>Student ID</label>
-      <input type="text" id="inStudentId" value="0182500000000000" oninput="updatePreview()">
+      <input type="text" id="inStudentId" value="0182530012101150" oninput="updatePreview()">
+    </div>
+
+    <div class="form-group hidden" id="varsityNameGroup">
+      <label>University / Campus Name</label>
+      <input type="text" id="inVarsityName" value="Leading University, Sylhet" oninput="updatePreview()">
     </div>
 
     <div class="form-group">
       <label>Submission Date</label>
-      <input type="text" id="inSubDate" value="19/09/2026" oninput="updatePreview()">
+      <input type="text" id="inSubDate" value="09-11-2026" oninput="updatePreview()">
     </div>
 
     <button class="btn-download" onclick="download1PagePDF()">
@@ -442,16 +548,16 @@
 
       <!-- HEADER SECTION -->
       <img class="logo" src="lu.png" alt="Leading University Logo">
-      <div class="university-name">Leading University</div>
-      <div class="dept-name" id="outDept">Department of Computer Science and Engineering</div>
+      <div class="university-name" id="headerUniName">Leading University</div>
+      <div class="dept-name" id="headerDeptName">Department of Computer Science and Engineering</div>
 
-      <!-- MIDDLE SECTION -->
-      <div class="middle-section">
+      <!-- MIDDLE SECTION (ASSIGNMENT / LAB) -->
+      <div class="middle-section" id="standardMiddleSection">
         <div class="report-title" id="assignmentPreviewTitle">Assignment</div>
         <div class="report-title hidden" id="labPreviewTitle">Lab Report - 01</div>
 
-        <div class="course-info">Course Title: <span id="outCourseTitle">................</span></div>
-        <div class="course-info">Course Code: <span id="outCourseCode">.......</span></div>
+        <div class="course-info">Course Title: <span id="outCourseTitle">Data Structures</span></div>
+        <div class="course-info">Course Code: <span id="outCourseCode">CSE-2111</span></div>
 
         <div class="topic-title" id="assignmentPreviewTopic">
           Assignment Name: <span id="outAssignmentName">..............</span>
@@ -462,25 +568,58 @@
         </div>
       </div>
 
-      <!-- FOOTER SECTION -->
-      <div class="info-block">
-        <div class="section-header">Submitted To:</div>
-        <div class="info-text">Name: <span id="outTeacherName">Teacher Name</span></div>
-        <div class="info-text">Designation: <span id="outTeacherDesig">Lecturer</span></div>
-        <div class="info-text">Faculty: <span id="outTeacherFaculty">Department of EEE/CSE (teacher)</span></div>
+      <!-- MIDDLE SECTION (CONTEST REPORT) -->
+      <div class="contest-middle-section hidden" id="contestMiddleSection">
+        <div class="contest-course-info">Course Name : <span id="outContestCourseTitle">Data Structures</span></div>
+        <div class="contest-course-info">Course Code: <span id="outContestCourseCode">CSE-2111</span></div>
+        <div class="contest-report-title" id="outContestTitle">Contest Report</div>
       </div>
 
-      <div class="info-block submitted-by">
+      <!-- FOOTER SECTION (ASSIGNMENT / LAB) -->
+      <div class="info-block" id="standardSubmittedTo">
+        <div class="section-header">Submitted To:</div>
+        <div class="info-text">Name: <span id="outTeacherName">Abdulla Al Mahmud</span></div>
+        <div class="info-text">Designation: <span id="outTeacherDesig">Lecturer</span></div>
+        <div class="info-text">Faculty: <span id="outTeacherFaculty">Department of Computer Science and Engineering</span></div>
+      </div>
+
+      <div class="info-block submitted-by" id="standardSubmittedBy">
         <div class="section-header">Submitted By:</div>
-        <div class="info-text">Name: <span id="outStudentName">Your Name</span></div>
-        <div class="info-text">Department: <span id="outStudentDept">CSE</span></div>
+        <div class="info-text">Name: <span id="outStudentName">Avishek Dash Jibon</span></div>
+        <div class="info-text">Department: <span id="outStudentDept">Department of Computer Science and Engineering</span></div>
         <div class="info-text">Batch: <span id="outBatch">67<sup>th</sup></span></div>
         <div class="info-text">Section: <span id="outSection">D</span></div>
-        <div class="info-text" style="font-weight: bold; margin-top: 4px;">ID: <span id="outStudentId">0182500000000000</span></div>
+        <div class="info-text" style="font-weight: bold; margin-top: 4px;">ID: <span id="outStudentId">0182530012101150</span></div>
       </div>
 
-      <div class="footer-date">
-        Submission Date : <span id="outSubDate">19/09/2026</span>
+      <!-- CONTEST REPORT BOXES SECTION -->
+      <div class="contest-container hidden" id="contestBoxesSection">
+        <!-- Left Box: Submitted to -->
+        <div class="contest-box">
+          <div class="contest-box-header">Submitted to:</div>
+          <div class="contest-box-text" id="outContestTeacherName">Abdulla Al Mahmud</div>
+          <div class="contest-box-text" id="outContestTeacherDesig">Lecturer</div>
+          <div class="contest-box-text" id="outContestTeacherDept">Department of Computer Science and Engineering</div>
+          <div class="contest-box-varsity" id="outContestTeacherVarsity">Leading University, Sylhet</div>
+        </div>
+
+        <!-- Vertical Divider Line -->
+        <div class="contest-divider-line"></div>
+
+        <!-- Right Box: Submitted by -->
+        <div class="contest-box">
+          <div class="contest-box-header">Submitted by:</div>
+          <div class="contest-box-text" id="outContestStudentName">Avishek Dash Jibon</div>
+          <div class="contest-box-text" id="outContestStudentId">ID:0182530012101150</div>
+          <div class="contest-box-text" id="outContestBatchSec">Batch:67<sup>th</sup> Sec: D</div>
+          <div class="contest-box-text" id="outContestStudentDept">Department of Computer Science and Engineering</div>
+          <div class="contest-box-varsity" id="outContestStudentVarsity">Leading University, Sylhet</div>
+        </div>
+      </div>
+
+      <!-- FOOTER DATE (COMMON) -->
+      <div class="footer-date" id="footerDate">
+        <span id="footerDateLabel">Submission Date : </span><span id="outSubDate">09-11-2026</span>
       </div>
 
     </div>
@@ -497,36 +636,96 @@
     function changeCoverType() {
       const type = document.getElementById('coverType').value;
 
+      const deptGroup = document.getElementById('deptGroup');
       const assignmentNameGroup = document.getElementById('assignmentNameGroup');
       const labReportNoGroup = document.getElementById('labReportNoGroup');
       const labReportTitleGroup = document.getElementById('labReportTitleGroup');
       const assignmentTopicGroup = document.getElementById('assignmentTopicGroup');
+      const contestTitleGroup = document.getElementById('contestTitleGroup');
+      const varsityNameGroup = document.getElementById('varsityNameGroup');
+      const courseTitleLabel = document.getElementById('courseTitleLabel');
+
+      const headerUniName = document.getElementById('headerUniName');
+      const headerDeptName = document.getElementById('headerDeptName');
+      const standardMiddleSection = document.getElementById('standardMiddleSection');
+      const contestMiddleSection = document.getElementById('contestMiddleSection');
+      const standardSubmittedTo = document.getElementById('standardSubmittedTo');
+      const standardSubmittedBy = document.getElementById('standardSubmittedBy');
+      const contestBoxesSection = document.getElementById('contestBoxesSection');
 
       const assignmentPreviewTitle = document.getElementById('assignmentPreviewTitle');
       const labPreviewTitle = document.getElementById('labPreviewTitle');
       const assignmentPreviewTopic = document.getElementById('assignmentPreviewTopic');
       const labPreviewTopic = document.getElementById('labPreviewTopic');
+      const footerDateLabel = document.getElementById('footerDateLabel');
 
       if (type === 'assignment') {
+        deptGroup.classList.remove('hidden');
         assignmentNameGroup.classList.remove('hidden');
-        assignmentTopicGroup.classList.add('hidden');
+        assignmentTopicGroup.classList.remove('hidden');
         labReportNoGroup.classList.add('hidden');
         labReportTitleGroup.classList.add('hidden');
+        contestTitleGroup.classList.add('hidden');
+        varsityNameGroup.classList.add('hidden');
+        courseTitleLabel.innerText = 'Course Title';
+
+        headerUniName.classList.remove('hidden');
+        headerDeptName.classList.remove('hidden');
+        standardMiddleSection.classList.remove('hidden');
+        contestMiddleSection.classList.add('hidden');
+        standardSubmittedTo.classList.remove('hidden');
+        standardSubmittedBy.classList.remove('hidden');
+        contestBoxesSection.classList.add('hidden');
 
         assignmentPreviewTitle.classList.remove('hidden');
         labPreviewTitle.classList.add('hidden');
         assignmentPreviewTopic.classList.remove('hidden');
         labPreviewTopic.classList.add('hidden');
-      } else {
+
+        footerDateLabel.innerText = 'Submission Date : ';
+      } else if (type === 'lab') {
+        deptGroup.classList.remove('hidden');
         assignmentNameGroup.classList.add('hidden');
         assignmentTopicGroup.classList.add('hidden');
         labReportNoGroup.classList.remove('hidden');
         labReportTitleGroup.classList.remove('hidden');
+        contestTitleGroup.classList.add('hidden');
+        varsityNameGroup.classList.add('hidden');
+        courseTitleLabel.innerText = 'Course Title';
+
+        headerUniName.classList.remove('hidden');
+        headerDeptName.classList.remove('hidden');
+        standardMiddleSection.classList.remove('hidden');
+        contestMiddleSection.classList.add('hidden');
+        standardSubmittedTo.classList.remove('hidden');
+        standardSubmittedBy.classList.remove('hidden');
+        contestBoxesSection.classList.add('hidden');
 
         assignmentPreviewTitle.classList.add('hidden');
         labPreviewTitle.classList.remove('hidden');
         assignmentPreviewTopic.classList.add('hidden');
         labPreviewTopic.classList.remove('hidden');
+
+        footerDateLabel.innerText = 'Submission Date : ';
+      } else if (type === 'contest') {
+        deptGroup.classList.add('hidden');
+        assignmentNameGroup.classList.add('hidden');
+        assignmentTopicGroup.classList.add('hidden');
+        labReportNoGroup.classList.add('hidden');
+        labReportTitleGroup.classList.add('hidden');
+        contestTitleGroup.classList.remove('hidden');
+        varsityNameGroup.classList.remove('hidden');
+        courseTitleLabel.innerText = 'Course Name';
+
+        headerUniName.classList.add('hidden');
+        headerDeptName.classList.add('hidden');
+        standardMiddleSection.classList.add('hidden');
+        contestMiddleSection.classList.remove('hidden');
+        standardSubmittedTo.classList.add('hidden');
+        standardSubmittedBy.classList.add('hidden');
+        contestBoxesSection.classList.remove('hidden');
+
+        footerDateLabel.innerText = 'Submission : ';
       }
 
       updatePreview();
@@ -534,42 +733,87 @@
 
 
     function updatePreview() {
-      document.getElementById('outDept').innerText = document.getElementById('inDept').value;
-      document.getElementById('outCourseTitle').innerText = document.getElementById('inCourseTitle').value;
-      document.getElementById('outCourseCode').innerText = document.getElementById('inCourseCode').value;
+      const deptVal = document.getElementById('inDept').value;
+      const courseTitleVal = document.getElementById('inCourseTitle').value;
+      const courseCodeVal = document.getElementById('inCourseCode').value;
+      const teacherNameVal = document.getElementById('inTeacherName').value;
+      const teacherDesigVal = document.getElementById('inTeacherDesig').value;
+      const teacherFacultyVal = document.getElementById('inTeacherFaculty').value;
+      const varsityNameVal = document.getElementById('inVarsityName').value;
+      const studentNameVal = document.getElementById('inStudentName').value;
+      const studentDeptVal = document.getElementById('inStudentDept').value;
+      const sectionVal = document.getElementById('inSection').value;
+      const studentIdVal = document.getElementById('inStudentId').value;
+      const subDateVal = document.getElementById('inSubDate').value;
+
+      // Superscript batch
+      let batchVal = document.getElementById('inBatch').value;
+      const batchFormatted = batchVal.replace(/(th|st|nd|rd)/gi, '<sup>$1</sup>');
+
+      // 1. Standard Assignment & Lab Outputs
+      document.getElementById('headerDeptName').innerText = deptVal;
+      document.getElementById('outCourseTitle').innerText = courseTitleVal;
+      document.getElementById('outCourseCode').innerText = courseCodeVal;
       document.getElementById('outAssignmentName').innerText = document.getElementById('inAssignmentName').value;
       document.getElementById('assignmentPreviewTitle').innerText = 'Assignment';
 
       const reportNo = document.getElementById('inReportNo').value;
       const reportTitle = document.getElementById('inTopicTitle').value;
-
       document.getElementById('labPreviewTitle').innerText = 'Lab Report - ' + reportNo;
       document.getElementById('outTopicTitle').innerText = reportTitle;
 
-      document.getElementById('outTeacherName').innerText = document.getElementById('inTeacherName').value;
-      document.getElementById('outTeacherDesig').innerText = document.getElementById('inTeacherDesig').value;
-      document.getElementById('outTeacherFaculty').innerText = document.getElementById('inTeacherFaculty').value;
+      document.getElementById('outTeacherName').innerText = teacherNameVal;
+      document.getElementById('outTeacherDesig').innerText = teacherDesigVal;
+      document.getElementById('outTeacherFaculty').innerText = teacherFacultyVal;
 
-      document.getElementById('outStudentName').innerText = document.getElementById('inStudentName').value;
-      document.getElementById('outStudentDept').innerText = document.getElementById('inStudentDept').value;
+      document.getElementById('outStudentName').innerText = studentNameVal;
+      document.getElementById('outStudentDept').innerText = studentDeptVal;
+      document.getElementById('outBatch').innerHTML = batchFormatted;
+      document.getElementById('outSection').innerText = sectionVal;
+      document.getElementById('outStudentId').innerText = studentIdVal;
+      document.getElementById('outSubDate').innerText = subDateVal;
 
-      let batchVal = document.getElementById('inBatch').value;
-      batchVal = batchVal.replace(/(th|st|nd|rd)/gi, '<sup>$1</sup>');
-      document.getElementById('outBatch').innerHTML = batchVal;
+      // 2. Contest Report Outputs
+      document.getElementById('outContestCourseTitle').innerText = courseTitleVal;
+      document.getElementById('outContestCourseCode').innerText = courseCodeVal;
+      document.getElementById('outContestTitle').innerText = document.getElementById('inContestTitle').value || 'Contest Report';
 
-      document.getElementById('outSection').innerText = document.getElementById('inSection').value;
-      document.getElementById('outStudentId').innerText = document.getElementById('inStudentId').value;
-      document.getElementById('outSubDate').innerText = document.getElementById('inSubDate').value;
+      document.getElementById('outContestTeacherName').innerText = teacherNameVal;
+      document.getElementById('outContestTeacherDesig').innerText = teacherDesigVal;
+      document.getElementById('outContestTeacherDept').innerText = teacherFacultyVal;
+      document.getElementById('outContestTeacherVarsity').innerText = varsityNameVal;
+
+      document.getElementById('outContestStudentName').innerText = studentNameVal;
+
+      // Clean ID formatting
+      let cleanId = studentIdVal.replace(/^ID\s*:\s*/i, '');
+      document.getElementById('outContestStudentId').innerText = 'ID:' + cleanId;
+
+      // Clean Batch & Sec formatting
+      let cleanBatch = batchFormatted.replace(/^Batch\s*:\s*/i, '');
+      let cleanSec = sectionVal.replace(/^Sec\s*:\s*/i, '');
+      document.getElementById('outContestBatchSec').innerHTML = 'Batch:' + cleanBatch + ' Sec: ' + cleanSec;
+
+      document.getElementById('outContestStudentDept').innerText = studentDeptVal;
+      document.getElementById('outContestStudentVarsity').innerText = varsityNameVal;
     }
 
 
     /* DIRECT PDF DOWNLOAD FUNCTION */
     function download1PagePDF() {
       const element = document.getElementById('coverPage');
+      const type = document.getElementById('coverType').value;
+      
+      let filename = 'Leading_University_Assignment.pdf';
+      if (type === 'contest') {
+        filename = 'Leading_University_Contest_Report.pdf';
+      } else if (type === 'lab') {
+        filename = 'Leading_University_Lab_Report.pdf';
+      }
       
       const opt = {
         margin:       0,
-        filename:     'Leading_University_Cover_Page.pdf',
+        filename:     filename,
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { 
           scale: 2, 
@@ -591,3 +835,4 @@
 
 </body>
 </html>
+```
