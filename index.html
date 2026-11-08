@@ -465,12 +465,12 @@
 
     <div class="form-group">
       <label>Teacher Name</label>
-      <input type="text" id="inTeacherName" value="Abdulla Al Mahmud" oninput="updatePreview()">
+      <input type="text" id="inTeacherName" value="   " oninput="updatePreview()">
     </div>
 
     <div class="form-group">
       <label>Designation</label>
-      <input type="text" id="inTeacherDesig" value="Lecturer" oninput="updatePreview()">
+      <input type="text" id="inTeacherDesig" value="   " oninput="updatePreview()">
     </div>
 
     <div class="form-group">
@@ -482,7 +482,7 @@
 
     <div class="form-group">
       <label>Student Name</label>
-      <input type="text" id="inStudentName" value="Avishek Dash Jibon" oninput="updatePreview()">
+      <input type="text" id="inStudentName" value="   " oninput="updatePreview()">
     </div>
 
     <div class="form-group">
@@ -502,17 +502,17 @@
 
     <div class="form-group">
       <label>Student ID</label>
-      <input type="text" id="inStudentId" value="0182530012101150" oninput="updatePreview()">
+      <input type="text" id="inStudentId" value="   " oninput="updatePreview()">
     </div>
 
     <div class="form-group hidden" id="varsityNameGroup">
-      <label>University / Campus Name</label>
+      <label>University</label>
       <input type="text" id="inVarsityName" value="Leading University, Sylhet" oninput="updatePreview()">
     </div>
 
     <div class="form-group">
       <label>Submission Date</label>
-      <input type="text" id="inSubDate" value="09-11-2026" oninput="updatePreview()">
+      <input type="text" id="inSubDate" value="   " oninput="updatePreview()">
     </div>
 
     <button class="btn-download" onclick="download1PagePDF()">
@@ -538,13 +538,13 @@
       <!-- MIDDLE SECTION (ASSIGNMENT / LAB) -->
       <div class="middle-section" id="standardMiddleSection">
         <div class="report-title" id="assignmentPreviewTitle">Assignment</div>
-        <div class="report-title hidden" id="labPreviewTitle">Lab Report - 01</div>
+        <div class="report-title hidden" id="labPreviewTitle">Lab Report - no</div>
 
-        <div class="course-info">Course Title: <span id="outCourseTitle">Data Structures</span></div>
-        <div class="course-info">Course Code: <span id="outCourseCode">CSE-2111</span></div>
+        <div class="course-info">Course Title: <span id="outCourseTitle">   </span></div>
+        <div class="course-info">Course Code: <span id="outCourseCode">   </span></div>
 
         <div class="topic-title" id="assignmentPreviewTopic">
-          Assignment Name: <span id="outAssignmentName">..............</span>
+          Assignment Name: <span id="outAssignmentName">   </span>
         </div>
 
         <div class="topic-title hidden" id="labPreviewTopic">
@@ -554,26 +554,26 @@
 
       <!-- MIDDLE SECTION (CONTEST REPORT) -->
       <div class="contest-middle-section hidden" id="contestMiddleSection">
-        <div class="contest-course-info">Course Name : <span id="outContestCourseTitle">Data Structures</span></div>
-        <div class="contest-course-info">Course Code: <span id="outContestCourseCode">CSE-2111</span></div>
+        <div class="contest-course-info">Course Name : <span id="outContestCourseTitle">   </span></div>
+        <div class="contest-course-info">Course Code: <span id="outContestCourseCode">   </span></div>
         <div class="contest-report-title" id="outContestTitle">Contest Report</div>
       </div>
 
       <!-- FOOTER SECTION (ASSIGNMENT / LAB) -->
       <div class="info-block" id="standardSubmittedTo">
         <div class="section-header">Submitted To:</div>
-        <div class="info-text">Name: <span id="outTeacherName">Abdulla Al Mahmud</span></div>
-        <div class="info-text">Designation: <span id="outTeacherDesig">Lecturer</span></div>
+        <div class="info-text">Name: <span id="outTeacherName">   </span></div>
+        <div class="info-text">Designation: <span id="outTeacherDesig">   </span></div>
         <div class="info-text">Faculty: <span id="outTeacherFaculty">Department of Computer Science and Engineering</span></div>
       </div>
 
       <div class="info-block submitted-by" id="standardSubmittedBy">
         <div class="section-header">Submitted By:</div>
-        <div class="info-text">Name: <span id="outStudentName">Avishek Dash Jibon</span></div>
+        <div class="info-text">Name: <span id="outStudentName">   </span></div>
         <div class="info-text">Department: <span id="outStudentDept">Department of Computer Science and Engineering</span></div>
         <div class="info-text">Batch: <span id="outBatch">67<sup>th</sup></span></div>
         <div class="info-text">Section: <span id="outSection">D</span></div>
-        <div class="info-text" style="font-weight: bold; margin-top: 4px;">ID: <span id="outStudentId">0182530012101150</span></div>
+        <div class="info-text" style="font-weight: bold; margin-top: 4px;">ID: <span id="outStudentId">   </span></div>
       </div>
 
       <!-- CONTEST REPORT BOXES SECTION -->
@@ -581,8 +581,8 @@
         <!-- Left Box: Submitted to -->
         <div class="contest-box">
           <div class="contest-box-header">Submitted to:</div>
-          <div class="contest-box-text" id="outContestTeacherName">Abdulla Al Mahmud</div>
-          <div class="contest-box-text" id="outContestTeacherDesig">Lecturer</div>
+          <div class="contest-box-text" id="outContestTeacherName">   </div>
+          <div class="contest-box-text" id="outContestTeacherDesig">   </div>
           <div class="contest-box-text" id="outContestTeacherDept">Department of Computer Science and Engineering</div>
           <div class="contest-box-varsity" id="outContestTeacherVarsity">Leading University, Sylhet</div>
         </div>
@@ -593,8 +593,8 @@
         <!-- Right Box: Submitted by -->
         <div class="contest-box">
           <div class="contest-box-header">Submitted by:</div>
-          <div class="contest-box-text" id="outContestStudentName">Avishek Dash Jibon</div>
-          <div class="contest-box-text" id="outContestStudentId">ID:0182530012101150</div>
+          <div class="contest-box-text" id="outContestStudentName">   </div>
+          <div class="contest-box-text" id="outContestStudentId">ID:   </div>
           <div class="contest-box-text" id="outContestBatchSec">Batch:67<sup>th</sup> Sec: D</div>
           <div class="contest-box-text" id="outContestStudentDept">Department of Computer Science and Engineering</div>
           <div class="contest-box-varsity" id="outContestStudentVarsity">Leading University, Sylhet</div>
@@ -603,7 +603,7 @@
 
       <!-- FOOTER DATE (COMMON) -->
       <div class="footer-date" id="footerDate">
-        <span id="footerDateLabel">Submission Date : </span><span id="outSubDate">09-11-2026</span>
+        <span id="footerDateLabel">Submission Date : </span><span id="outSubDate">   </span>
       </div>
 
     </div>
